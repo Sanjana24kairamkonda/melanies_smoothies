@@ -53,12 +53,19 @@ VALUES ('""" + ingredients_string + """', '""" + name_on_order + """')"""
 
 import requests
 
-smoothiefroot_response = requests.get(
-    "https://my.smoothiefroot.com/api/fruit/watermelon"
-)
+if ingredients_list:
+    ingredients_string = ''
 
-#st.write(smoothiefroot_response.json())
-sf_df = st.dataframe(
-    data=smoothiefroot_response.json(),
-    use_container_width=True
-)
+    for fruit_chosen in ingredients_list:
+        ingredients_string += fruit_chosen + ' '
+
+        st.subheader(fruit_chosen + ' Nutrition Information')
+
+        smoothiefroot_response = requests.get(
+            "https://my.smoothiefroot.com/api/fruit/" + fruit_chosen
+        )
+
+        sf_df = st.dataframe(
+            data=smoothiefroot_response.json(),
+            use_container_width=True
+        )
