@@ -81,7 +81,7 @@ if ingredients_list:
         INSERT INTO smoothies.public.orders
         (ingredients, name_on_order)
         VALUES
-        ('{ingredients_string.strip()}', '{name_on_order}')
+        ('{ingredients_string}', '{name_on_order}')
         """
 
         session.sql(my_insert_stmt).collect()
